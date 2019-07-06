@@ -5,14 +5,14 @@
  * If function run without any params -> return current sum
  */
 function sum(a) {
-  let currentSum = a;
-
-  function f(b) {
-    if (!arguments.length) {
-      return currentSum;
-    }
-    currentSum += b;
-    return f;
-  }
-  return f;
+	let currentSum = a;
+	let f = (...arg) => {
+		if (!arg.length) {
+			return currentSum;
+		}
+		currentSum += arg[0];
+		return f;
+	}
+	return f;
 }
+
