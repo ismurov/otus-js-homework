@@ -85,12 +85,11 @@ describe('Test promiseReduce() function', () => {
      *   reduce
      *   2
      */
-    assert.equal(log.len(), 5);
-    assert.equal(log.get(), 'fn1');
-    assert.equal(log.get(), 'reduce');
-    assert.equal(log.get(), 'fn2');
-    assert.equal(log.get(), 'reduce');
-    assert.equal(log.get(), '2');
+    const outputs = ['fn1', 'reduce', 'fn2', 'reduce', '2'];
+    assert.equal(log.len(), outputs.length, 'Number of outputs per console');
+    for (let i = 0; i < outputs.length; i++) {
+      assert.equal(log.get(), outputs[i], `Output to console with index ${i}`);
+    }
   });
 
   it("promiseReduce returns Promise", () => {
@@ -121,16 +120,16 @@ describe('Test promiseReduce() function', () => {
     const arr = [];
     for (let i = 0; i < 5; i++) {
       arr.push(() => new Promise(resolve => {
-        console.log(`func ${i}`)
+        console.log(`func ${i}`);
         setTimeout(() => resolve(i), 250 - i*50);
       }));
     }
     await promiseReduce(arr, (m, v) => m + v, '');
-    assert.equal(log.get(), 'func 0');
-    assert.equal(log.get(), 'func 1');
-    assert.equal(log.get(), 'func 2');
-    assert.equal(log.get(), 'func 3');
-    assert.equal(log.get(), 'func 4');
+    const outputs = ['func 0', 'func 1', 'func 2', 'func 3', 'func 4']
+    assert.equal(log.len(), outputs.length, 'Number of outputs per console');
+    for (let i = 0; i < outputs.length; i++) {
+      assert.equal(log.get(), outputs[i], `Output to console with index ${i}`);
+    }
   });
 });
 
