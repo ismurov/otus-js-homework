@@ -22,7 +22,7 @@ const defaultDelay = 100; // ms
  *
  * @param   {String}   host    Host for listen
  * @param   {Number}   port    Port for listen
- * @paran   {Number}   delay   Response delay
+ * @param   {Number}   delay   Response delay
  * @returns {http.Server}      Started server
  */
 //const runServer = (host, port, delay=0) => {
