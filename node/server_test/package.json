@@ -1,0 +1,19 @@
+{
+  "name": "server_test",
+  "version": "1.0.0",
+  "description": "Package for simple server testing",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.20.0",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "jest": "^24.8.0",
+    "supertest": "^4.0.2"
+  }
+}
