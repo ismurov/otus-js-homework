@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "Package for simple server testing",
   "main": "server.js",
+  "private": true,
   "scripts": {
     "test": "jest"
   },
-  "author": "",
   "license": "ISC",
   "dependencies": {
     "commander": "^2.20.0",

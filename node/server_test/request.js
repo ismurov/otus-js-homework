@@ -80,10 +80,8 @@ async function doRequestMany(url, n=1, doAsync=false) {
 }
 
 
-module.exports = {
-  doRequestMany,
-  doRequest
-};
+module.exports.doRequest = doRequest
+module.exports.doRequestMany = doRequestMany
 
 
 if (require.main === module) {
@@ -97,7 +95,7 @@ if (require.main === module) {
 
   const serverAddr = program.address;
   const N = program.number;
-  const flagAsync = program.async ? true: false;
+  const flagAsync = !!program.async;
 
   if (!Number.isSafeInteger(N) || N <= 0) {
     console.error('Number of request to server should be the natural number!');
