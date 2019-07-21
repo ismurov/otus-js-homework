@@ -4,7 +4,7 @@
 Результатом работы должен быть объект с массивами `{ files, folders }`.
 Вызовы файловой системы должны быть асинхронными.
 Скрипт принимает входной параметр - путь до папки.
-Добавить возможность выполнять этот скрипт через команду `npm run tree -- path`
+Добавить возможность выполнять этот скрипт через команду `npm run tree -- -p path`
 
 Пример
 
@@ -22,17 +22,17 @@ foo/
 
 ```json
 {
-"files": [
-"foo/f1.txt",
-"foo/f2.txt",
-"foo/bar/bar1.txt",
-"foo/bar/bar2.txt"
-],
-"dirs": [
-"foo",
-"foo/bar",
-"foo/bar/baz"
-]
+  "files": [
+    "foo/f1.txt",
+    "foo/f2.txt",
+    "foo/bar/bar1.txt",
+    "foo/bar/bar2.txt"
+  ],
+  "dirs": [
+    "foo",
+    "foo/bar",
+    "foo/bar/baz"
+  ]
 }
 ```
 
