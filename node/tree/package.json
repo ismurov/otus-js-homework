@@ -1,0 +1,20 @@
+{
+  "name": "tree",
+  "version": "1.0.0",
+  "description": "Script to search for files and folders in the selected system path",
+  "main": "tree.js",
+  "private": true,
+  "scripts": {
+    "tree": "./tree.js",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.20.0"
+  },
+  "devDependencies": {
+    "fs-extra": "^8.1.0",
+    "jest": "^24.8.0"
+  }
+}
