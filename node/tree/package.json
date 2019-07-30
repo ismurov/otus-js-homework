@@ -1,6 +1,6 @@
 {
   "name": "tree",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Script to search for files and folders in the selected system path",
   "main": "tree.js",
   "private": true,

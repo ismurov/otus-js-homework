@@ -44,6 +44,21 @@ async function tree (rootPath) {
   const searchDir = searchPath => {
     return fs.readdir(searchPath, options)
       .then(async dirItems => {
+        // for version of node below 10.10
+        // emulation fs.Dirent class
+        if (dirItems.length && typeof dirItems[0] == 'string') {
+          for (let i = 0; i < dirItems.length; i++) {
+            dirItems[i] = {
+              name: dirItems[i],
+              stats: await fs.stat(path.join(searchPath, dirItems[i])),
+              isFile: function() {return this.stats.isFile()},
+              isDirectory: function() {return this.stats.isDirectory()}
+            }
+          }
+        }
+        return dirItems;
+      })
+      .then(async dirItems => {
         const newPromises = []
         dirItems.forEach(dirent => {
           const itemPath = path.join(searchPath, dirent.name);
