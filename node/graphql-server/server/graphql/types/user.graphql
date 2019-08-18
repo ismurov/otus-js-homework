@@ -1,0 +1,52 @@
+"""
+Customer profile.
+"""
+type User {
+  _id: ID!
+  lastName: String!
+  firstName: String!
+  email: String
+  phone: String
+
+  "Full name: first and last names"
+  fullName: String!
+}
+
+type Query {
+  "Get a customer profile by ID."
+  getUser(_id: ID!): User
+
+  "Get all customer profiles."
+  allUsers: [User]
+}
+
+type Mutation {
+  "Create a new customer profile."
+  createUser(user: CreateUserInput!): User
+
+  "Update customer profile information."
+  updateUser(_id: ID!, user: UpdateUserInput!): User
+
+  "Delete customer profile."
+  deleteUser(_id: ID!): User
+}
+
+"""
+Fields for create new customer profile.
+"""
+input CreateUserInput {
+  firstName: String!
+  lastName: String!
+  email: String
+  phone: String
+}
+
+"""
+Fields for update customer profile information.
+"""
+input UpdateUserInput {
+  firstName: String
+  lastName: String
+  email: String
+  phone: String
+}
