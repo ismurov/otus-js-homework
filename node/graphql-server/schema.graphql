@@ -1,0 +1,294 @@
+# Product Category
+"""
+Product Category
+"""
+type Category {
+  _id: ID!
+  name: String!
+  description: String
+  products: [Product]
+}
+
+type Query {
+  
+  # Get a product category by ID.
+  "Get a product category by ID."
+  getCategory(_id: ID!): Category
+  
+  # Get all product categories.
+  "Get all product categories."
+  allCategories: [Category]
+  
+  # Get a customer order by ID.
+  "Get a customer order by ID."
+  getOrder(_id: ID!): Order
+  
+  # Get all customers orders.
+  "Get all customers orders."
+  allOrders: [Order]
+  
+  # Get a product by ID.
+  "Get a product by ID."
+  getProduct(_id: ID!): Product
+  
+  # Get all products.
+  "Get all products."
+  allProducts: [Product]
+  
+  # Get a customer profile by ID.
+  "Get a customer profile by ID."
+  getUser(_id: ID!): User
+  
+  # Get all customer profiles.
+  "Get all customer profiles."
+  allUsers: [User]
+}
+
+type Mutation {
+  
+  # Create a product category.
+  "Create a product category."
+  createCategory(category: CreateCategoryInput!): Category
+  
+  # Update product category information.
+  "Update product category information."
+  updateCategory(_id: ID!, category: UpdateCategoryInput!): Category
+  
+  # Delete product category.
+  "Delete product category."
+  deleteCategory(_id: ID!): Category
+  
+  # Create a new customer order.
+  "Create a new customer order."
+  createOrder(order: CreateOrderInput): Order
+  
+  # Update order information.
+  "Update order information."
+  updateOrder(_id: ID!, order: UpdateOrderInput): Order
+  
+  # Delete order.
+  "Delete order."
+  deleteOrder(_id: ID!): Order
+  
+  # Change order processing status.
+  "Change order processing status."
+  changeOrderStatus(_id: ID!, status: Status!): Order
+  
+  # Create a new order item.
+  "Create a new order item."
+  createOrderItem(item: CreateOrderItemInput): OrderItem
+  
+  # Update order item information.
+  "Update order item information."
+  updateOrderItem(_id: ID!, item: UpdateOrderItemInput): OrderItem
+  
+  # Delete order item.
+  "Delete order item."
+  deleteOrderItem(_id: ID!): OrderItem
+  
+  # Create a new product.
+  "Create a new product."
+  createProduct(product: CreateProductInput): Product
+  
+  # Update product information.
+  "Update product information."
+  updateProduct(_id: ID!, product: UpdateProductInput): Product
+  
+  # Delete product.
+  "Delete product."
+  deleteProduct(_id: ID!): Product
+  
+  # Create a new customer profile.
+  "Create a new customer profile."
+  createUser(user: CreateUserInput!): User
+  
+  # Update customer profile information.
+  "Update customer profile information."
+  updateUser(_id: ID!, user: UpdateUserInput!): User
+  
+  # Delete customer profile.
+  "Delete customer profile."
+  deleteUser(_id: ID!): User
+}
+
+
+# Fields for create new product category.
+"""
+Fields for create new product category.
+"""
+input CreateCategoryInput {
+  name: String!
+  description: String
+}
+
+
+# Fields for product category information.
+"""
+Fields for product category information.
+"""
+input UpdateCategoryInput {
+  name: String
+  description: String
+}
+
+scalar Date
+
+
+# Customer Order.
+"""
+Customer Order.
+"""
+type Order {
+  _id: ID!
+  orderData: Date!
+  user: User!
+  items: [OrderItem]
+  comment: String
+  status: Status!
+  totalPrice: Int!
+}
+
+
+# Item from Customer Order.
+"""
+Item from Customer Order.
+"""
+type OrderItem {
+  _id: ID!
+  order: Order!
+  product: Product!
+  quantity: Int!
+}
+
+
+# Fields for create new order.
+"""
+Fields for create new order.
+"""
+input CreateOrderInput {
+  user: ID!
+  comment: String
+}
+
+
+# Fields for update order information.
+"""
+Fields for update order information.
+"""
+input UpdateOrderInput {
+  comment: String
+}
+
+
+# Fields for add new item in order.
+"""
+Fields for add new item in order.
+"""
+input CreateOrderItemInput {
+  order: ID!
+  product: ID!
+  quantity: Int!
+}
+
+
+# Fields for updating order item information.
+"""
+Fields for updating order item information.
+"""
+input UpdateOrderItemInput {
+  quantity: Int!
+}
+
+
+# Order Processing Status
+"""
+Order Processing Status
+"""
+enum Status {
+  Processing
+  Complete
+  Canceled
+}
+
+
+# Product
+"""
+Product
+"""
+type Product {
+  _id: ID!
+  name: String!
+  description: String
+  price: Int!
+  category: Category!
+}
+
+
+# Fields for create new product.
+"""
+Fields for create new product.
+"""
+input CreateProductInput {
+  name: String!
+  description: String
+  price: Int!
+  category: ID!
+}
+
+
+# Fields for update product information.
+"""
+Fields for update product information.
+"""
+input UpdateProductInput {
+  name: String
+  description: String
+  price: Int
+  category: ID
+}
+
+
+# Customer profile.
+"""
+Customer profile.
+"""
+type User {
+  _id: ID!
+  lastName: String!
+  firstName: String!
+  email: String
+  phone: String
+  
+  # Full name: first and last names
+  "Full name: first and last names"
+  fullName: String!
+}
+
+
+# Fields for create new customer profile.
+"""
+Fields for create new customer profile.
+"""
+input CreateUserInput {
+  firstName: String!
+  lastName: String!
+  email: String
+  phone: String
+}
+
+
+# Fields for update customer profile information.
+"""
+Fields for update customer profile information.
+"""
+input UpdateUserInput {
+  firstName: String
+  lastName: String
+  email: String
+  phone: String
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}

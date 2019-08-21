@@ -1,0 +1,95 @@
+scalar Date
+
+"""
+Customer Order.
+"""
+type Order {
+  _id: ID!
+  orderData: Date!
+  user: User!
+  items: [OrderItem]
+  comment: String
+  status: Status!
+  totalPrice: Int!
+}
+
+"""
+Item from Customer Order.
+"""
+type OrderItem {
+  _id: ID!
+  order: Order!
+  product: Product!
+  quantity: Int!
+}
+
+type Query {
+  "Get a customer order by ID."
+  getOrder(_id: ID!): Order
+
+  "Get all customers orders."
+  allOrders: [Order]
+}
+
+type Mutation {
+  "Create a new customer order."
+  createOrder(order: CreateOrderInput): Order
+
+  "Update order information."
+  updateOrder(_id: ID!, order: UpdateOrderInput): Order
+
+  "Delete order."
+  deleteOrder(_id: ID!): Order
+
+  "Change order processing status."
+  changeOrderStatus(_id: ID!, status: Status!): Order
+
+  "Create a new order item."
+  createOrderItem(item: CreateOrderItemInput): OrderItem
+
+  "Update order item information."
+  updateOrderItem(_id: ID!, item: UpdateOrderItemInput): OrderItem
+
+  "Delete order item."
+  deleteOrderItem(_id: ID!): OrderItem
+}
+
+"""
+Fields for create new order.
+"""
+input CreateOrderInput {
+  user: ID!
+  comment: String
+}
+
+"""
+Fields for update order information.
+"""
+input UpdateOrderInput {
+  comment: String
+}
+
+"""
+Fields for add new item in order.
+"""
+input CreateOrderItemInput {
+  order: ID!
+  product: ID!
+  quantity: Int!
+}
+
+"""
+Fields for updating order item information.
+"""
+input UpdateOrderItemInput {
+  quantity: Int!
+}
+
+"""
+Order Processing Status
+"""
+enum Status {
+  Processing
+  Complete
+  Canceled
+}

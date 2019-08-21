@@ -1,0 +1,44 @@
+"""
+Product Category
+"""
+type Category {
+  _id: ID!
+  name: String!
+  description: String
+  products: [Product]
+}
+
+type Query {
+  "Get a product category by ID."
+  getCategory(_id: ID!): Category
+
+  "Get all product categories."
+  allCategories: [Category]
+}
+
+type Mutation {
+  "Create a product category."
+  createCategory(category: CreateCategoryInput!): Category
+
+  "Update product category information."
+  updateCategory(_id: ID!, category: UpdateCategoryInput!): Category
+
+  "Delete product category."
+  deleteCategory(_id: ID!): Category
+}
+
+"""
+Fields for create new product category.
+"""
+input CreateCategoryInput {
+  name: String!
+  description: String
+}
+
+"""
+Fields for product category information.
+"""
+input UpdateCategoryInput {
+  name: String
+  description: String
+}

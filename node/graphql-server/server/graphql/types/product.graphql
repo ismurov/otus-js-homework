@@ -1,0 +1,49 @@
+"""
+Product
+"""
+type Product {
+  _id: ID!
+  name: String!
+  description: String
+  price: Int!
+  category: Category!
+}
+
+type Query {
+  "Get a product by ID."
+  getProduct(_id: ID!): Product
+
+  "Get all products."
+  allProducts: [Product]
+}
+
+type Mutation {
+  "Create a new product."
+  createProduct(product: CreateProductInput): Product
+
+  "Update product information."
+  updateProduct(_id: ID!, product: UpdateProductInput): Product
+
+  "Delete product."
+  deleteProduct(_id: ID!): Product
+}
+
+"""
+Fields for create new product.
+"""
+input CreateProductInput {
+  name: String!
+  description: String
+  price: Int!
+  category: ID!
+}
+
+"""
+Fields for update product information.
+"""
+input UpdateProductInput {
+  name: String
+  description: String
+  price: Int
+  category: ID
+}
