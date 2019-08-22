@@ -1,0 +1,18 @@
+body {
+    padding: 20px;
+}
+.block {
+    margin-top: 50px;
+}
+
+my-tree {
+    display: block;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid red;
+    border-radius: 10px;
+}
+
+my-leaf {
+    display: inline-block;
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+            <title>
+                Custom Element Tree
+            </title>
+            <link rel="stylesheet" type="text/css" href="styles.css">
+            <script src="tree.js"></script>
+            <script>
+                const treeStruct = JSON.stringify({
+                  "id": "tree",
+                  "items":[
+                      {
+                        "id": 1,
+                        items:[
+                          {"id": 2},
+                          {"id": 3}
+                        ]
+                      },
+                      {
+                        "id": 4,
+                        items: [
+                          {"id": 5},
+                          {"id": 6},
+                          {"id": 7},
+                          {
+                            "id": 8,
+                            "items": [
+                              {"id":9}
+                            ]
+                          }
+                        ]
+                      },
+                      {"id": 10},
+                      {"id": 11}
+                    ]
+                  });
+                setTimeout(() => {
+                    const elem = document.querySelector('#tree');
+                    elem.setAttribute('data-struct', treeStruct);
+                    elem.insertAdjacentHTML('beforebegin', `<p><code>data-struct='${treeStruct}</code></p>`);
+                    document.querySelector('#tree-wait').remove();
+                }, 2000);
+                setTimeout(() => {
+                    const elem = document.querySelector('#tree-shadow');
+                    elem.setAttribute('data-struct', treeStruct);
+                    elem.insertAdjacentHTML('beforebegin', `<p><code>data-struct='${treeStruct}</code></p>`);
+                    document.querySelector('#tree-shadow-wait').remove();
+                }, 2000);
+            </script>
+        </meta>
+    </head>
+    <body>
+        <h2>Custom Element Tree</h2>
+        <p>&#127796; – &lt;my-tree&gt; element <br>
+           &#127807; – &lt;my-leaf&gt; element <br>
+        </p>
+
+        <div class="block">
+          <h3>Simple declaration</h3>
+          <p><code>&lt;my-tree data-struct='{"id": "simple", "items": [{"id": "simple-1"}, {"id": "simple-2", "items": [{"id": "simple-3"}, {"id": "simple-4"}]}]}'&gt;&lt;/my-tree&gt;</code></p>
+
+          <!-- My Tree -->
+          <my-tree data-struct='{"id": "simple", "items": [{"id": "simple-1"}, {"id": "simple-2", "items": [{"id": "simple-3"}, {"id": "simple-4"}]}]}'></my-tree>
+        </div>
+
+        <div class="block">
+          <h3>Set `data-struct` attribute after declaration</h3>
+          <p id="tree-wait">waiting 2 second...</p>
+          <p><code>&lt;my-tree&gt;&lt;/my-tree&gt;</code></p>
+
+          <!-- My Tree -->
+          <my-tree id="tree"></my-tree>
+        </div>
+
+        <div class="block">
+          <h3>With shadow DOM and loading styles from `tree.css`</h3>
+          <p id="tree-shadow-wait">waiting 2 second...</p>
+          <p><code>&lt;my-tree data-shadow data-shadow-style-href="tree.css"&gt;&lt;/my-tree&gt;</code></p>
+
+          <!-- My Tree -->
+          <my-tree id="tree-shadow" data-shadow data-shadow-style-href="tree.css"></my-tree>
+        </div>
+    </body>
+</html>
