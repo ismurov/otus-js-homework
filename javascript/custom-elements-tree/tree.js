@@ -5,11 +5,11 @@ customElements.define('my-tree', class extends HTMLElement {
         this._init = false;
         this._shadow = false;
         this._shadowStyleHref = '';
-        this._struct = '';
+        this._struct = {};
         this._level = 0;
     }
     static get observedAttributes() {
-        return ['data-struct'];
+        return ['data-struct', ];
     }
     attributeChangedCallback(name, oldValue, newValue) {
         if (name === 'data-struct') {
@@ -20,14 +20,14 @@ customElements.define('my-tree', class extends HTMLElement {
         }
     }
     connectedCallback() {
-        this._shadow = this.dataset.shadow !== undefined;
+        this._shadow = this.dataset.hasOwnProperty('shadow');
         if (this._shadow) {
             this.attachShadow({
                 mode: 'open'
             });
-            this._shadowStyleHref = this.dataset.shadowStyleHref || '';
         }
-        this._level = +this.dataset.level + 1 || this._level
+        this._shadowStyleHref = this.dataset.shadowStyleHref || '';
+        this._level = +this.dataset.level || this._level
 
         if (this.dataset.struct) {
             this._struct = JSON.parse(this.dataset.struct);
@@ -48,12 +48,6 @@ customElements.define('my-tree', class extends HTMLElement {
         this.removeAttribute('data-shadow');
         this.removeAttribute('data-shadow-style-href');
 
-        if (this._level > 0) {
-            this.setAttribute('data-level', this._level);
-        } else {
-            this.removeAttribute('data-level');
-        }
-
         if (this._struct.id) {
             this.setAttribute('id', this._struct.id);
         }
@@ -65,7 +59,7 @@ customElements.define('my-tree', class extends HTMLElement {
                 if (!node.hasOwnProperty('items')) {
                     html += `<my-leaf id=${node.id} data-level=${this._level + 1}></my-leaf>`;
                 } else {
-                    html += `<my-tree id=${node.id} data-struct=${JSON.stringify(node)} data-level=${this._level + 1}></my-tree>`;
+                    html += `<my-tree data-struct=${JSON.stringify(node)} data-level=${this._level + 1}></my-tree>`;
                 }
             }
         }
