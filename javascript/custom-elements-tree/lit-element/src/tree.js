@@ -21,12 +21,16 @@ customElements.define('my-tree', class extends LitElement {
     }
     attributeChangedCallback(name, oldValue, newValue) {
         if (name === 'data-struct' && newValue) {
-            const struct = JSON.parse(newValue);
-            if (struct.id) {
-                this._id = struct.id;
-            }
-            if (Array.isArray(struct.items)) {
-                this._struct = struct.items;
+            try {
+                const struct = JSON.parse(newValue);
+                if (struct.id) {
+                    this._id = struct.id;
+                }
+                if (Array.isArray(struct.items)) {
+                    this._struct = struct.items;
+                }
+            } catch (e) {
+                console.error(e);
             }
         }
         super.attributeChangedCallback(name, oldValue, newValue);
@@ -49,12 +53,6 @@ customElements.define('my-tree', class extends LitElement {
     }
     render() {
         this.removeAttribute('data-struct');
-
-        // if (this._level > 0) {
-        //     this.setAttribute('data-level', this._level);
-        // } else {
-        //     this.removeAttribute('data-level');
-        // }
 
         if (this._id) {
             this.setAttribute('id', this._id);

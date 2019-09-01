@@ -4,18 +4,19 @@ customElements.define('my-tree', class extends HTMLElement {
         super();
         this._init = false;
         this._shadow = false;
-        this._shadowStyleHref = '';
         this._struct = {};
         this._level = 0;
+        this._shadowStyleHref = '';
     }
     static get observedAttributes() {
-        return ['data-struct', ];
+        return ['data-struct'];
     }
     attributeChangedCallback(name, oldValue, newValue) {
         if (name === 'data-struct') {
             if (newValue && this._init) {
-                this._struct = JSON.parse(newValue);
-                this.render();
+                if (this.updateStruct(newValue)) {
+                    this.render();
+                }
             }
         }
     }
@@ -26,15 +27,26 @@ customElements.define('my-tree', class extends HTMLElement {
                 mode: 'open'
             });
         }
-        this._shadowStyleHref = this.dataset.shadowStyleHref || '';
-        this._level = +this.dataset.level || this._level
+
+        this._level = +this.dataset.level || this._level;
 
         if (this.dataset.struct) {
-            this._struct = JSON.parse(this.dataset.struct);
+            this.updateStruct(this.dataset.struct);
         }
+        
+        this._shadowStyleHref = this.dataset.shadowStyleHref || '';
 
         this._init = true;
         this.render();
+    }
+    updateStruct(value) {
+        try {
+            this._struct = JSON.parse(value);
+            return true
+        } catch (e) {
+            console.error(e);
+        }
+        return false
     }
     render() {
         let html = '';
