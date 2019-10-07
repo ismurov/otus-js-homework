@@ -1,0 +1,7 @@
+.SplitScreen__container {
+    height: 83vh;
+}
+
+.col.SplitScreen__container {
+    padding: 0;
+}

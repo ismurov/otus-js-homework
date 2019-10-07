@@ -1,0 +1,15 @@
+.CityList {
+  overflow-y: auto;
+  max-height: 80%;
+  padding-bottom: 20px;
+}
+
+.CityList__link {
+  color: #f16051;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.CityList__link:hover {
+  color: #fff;
+}
