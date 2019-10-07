@@ -1,0 +1,12 @@
+my-tree {
+    display: block;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid green;
+    border-radius: 5px;
+}
+
+my-leaf {
+    display: inline-block;
+    margin-left: 20px;
+}

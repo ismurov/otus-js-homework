@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Custom Element Tree</title>
+
+    <script>
+      if (!window.customElements) {
+        document.write('<!--');
+      }
+    </script>
+    <script src="./vendor/custom-elements-es5-adapter.js"></script>
+    <!-- ! DO NOT REMOVE THIS COMMENT, WE NEED ITS CLOSING MARKER -->
+  </head>
+
+  <body>
+    <header><h1>Custom Element Tree</h1></header>
+
+    <main>
+      <div>
+        &#127796; – &lt;my-tree&gt; element <br>
+        &#127807; – &lt;my-leaf&gt; element <br>
+      </div>
+      
+      <div class="block">
+        <h3>Simple declaration</h3>
+        <p><code>&lt;my-tree data-struct='{"id": "simple", "items": [{"id": "simple-1"}, {"id": "simple-2", "items": [{"id": "simple-3"}, {"id": "simple-4"}]}]}'&gt;&lt;/my-tree&gt;</code></p>
+
+        <!-- My Tree -->
+        <my-tree data-struct='{"id": "simple", "items": [{"id": "simple-1"}, {"id": "simple-2", "items": [{"id": "simple-3"}, {"id": "simple-4"}]}]}'></my-tree>
+      </div>
+
+      <div class="block">
+        <h3>Set `data-struct` attribute after declaration</h3>
+        <p id="tree-wait">waiting 2 second...</p>
+        <p><code>&lt;my-tree&gt;&lt;/my-tree&gt;</code></p>
+
+        <!-- My Tree -->
+        <my-tree id="tree"></my-tree>
+      </div>
+
+      <div class="block">
+        <h3>With shadow DOM and loading styles from `src/tree.css`</h3>
+        <p id="tree-shadow-wait">waiting 2 second...</p>
+        <p><code>&lt;my-tree data-shadow data-shadow-style-href="src/tree.css"&gt;&lt;/my-tree&gt;</code></p>
+
+        <!-- My Tree -->
+        <my-tree id="tree-shadow" data-shadow data-shadow-style-href="src/tree.css"></my-tree>
+      </div>
+    </main>
+    <script src="./vendor/webcomponents-loader.js"></script>
+  </body>
+</html>
