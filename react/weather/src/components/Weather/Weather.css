@@ -1,0 +1,29 @@
+.Weather__info {
+  width: 60%;
+  font-size: 20px;
+  font-weight: 200;
+  letter-spacing: 2px;
+}
+
+.Weather__key {
+  color: #f16051;
+  border-bottom: solid 2px rgba(255,255,255,0.06);
+  padding: 20px 0 20px 0;
+  font-weight: 400;
+}
+
+.Weather__key:last-child {
+  border: 0;
+}
+
+.Weather__value {
+  color: #fff;
+  font-weight: 200;
+}
+
+.Weather__error {
+  color: #f16051;
+  font-size: 20px;
+  letter-spacing: 1px;
+  font-weight: 200;
+}

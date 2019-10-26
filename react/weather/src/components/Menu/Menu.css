@@ -1,0 +1,16 @@
+.Menu {
+  height: 7vh;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-right: -15px;
+  margin-left: -15px;
+  padding-right: 15px;
+  padding-left: 15px;
+  background-color: #f16051;
+}
+
+.Menu button {
+  margin: 0 5px;
+  background-color: #f16051;
+}
