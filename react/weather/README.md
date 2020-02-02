@@ -1,5 +1,10 @@
 # React Weather App
 
+## None
+The app requires a token to work properly from [Open Weather API](https://openweathermap.org/). The token is set through the environment variable REACT_APP_API_KEY.
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
