@@ -1,0 +1,22 @@
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let wordsList of [22,33,44]">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{wordsList}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-list>
+      <mat-list-item *ngFor="let word of ['one', 'two', 'three']"> {{word}} </mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>
+</mat-accordion>
+<mat-card-actions>
+  <button mat-raised-button>
+    Добавить
+  </button>
+</mat-card-actions>
+<mat-card-footer *ngIf="true">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Новое слово - перевод">
+  </mat-form-field>
+</mat-card-footer>
