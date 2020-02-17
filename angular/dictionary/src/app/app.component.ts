@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Routes } from '@angular/router';
-
 
 interface NavLink {
   path: string;

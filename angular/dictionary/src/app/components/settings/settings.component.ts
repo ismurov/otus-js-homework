@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
 import { StorageService } from "../../services/storage.service";
 import { Language } from "../../app.interfaces";
 import {
   languages,
   levels,
-  defaultLanguage,
-  defaultLevel
 } from "../../config";
 
 
@@ -17,14 +14,13 @@ import {
 })
 export class SettingsComponent implements OnInit {
 
-  languages: Language[] = [...languages];
-  levels: number[] = [...levels];
-
   selectedLanguage: Language;
   selectedLevel: number;
 
+  languages: Language[] = [...languages];
+  levels: number[] = [...levels];
+
   constructor(
-    private router: Router,
     private storage: StorageService,
   ) {}
 
@@ -38,8 +34,7 @@ export class SettingsComponent implements OnInit {
   }
 
   onChangeLangSelect(eventValue: string) {
-    console.log(this.languages.find((el, i, arr) => {console.log(el, eventValue, i, arr);return false}));
-    this.selectedLanguage = this.languages.find(({value}) => value === eventValue)
+    this.selectedLanguage = this.languages.find(({value}) => value === eventValue);
   }
 
   onAgreeClick() {
@@ -48,12 +43,12 @@ export class SettingsComponent implements OnInit {
   }
 
   onResetClick() {
-    this.storage.setLang(Object.assign({}, defaultLanguage));
-    this.storage.setLevel(defaultLevel);
+    this.storage.resetLang();
+    this.storage.resetLevel();
     this.setInitialState();
   }
 
   onClearClick() {
-    this.storage.clearDictStorage();
+    this.storage.clearDict();
   }
 }

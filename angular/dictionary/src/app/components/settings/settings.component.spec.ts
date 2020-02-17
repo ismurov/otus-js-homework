@@ -1,5 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatSelectModule } from '@angular/material';
+import {
+  MatSelectModule,
+  MatCardModule,
+} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SettingsComponent } from './settings.component';
@@ -11,7 +14,11 @@ describe('SettingsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SettingsComponent ],
-      imports: [ MatSelectModule, BrowserAnimationsModule ],
+      imports: [
+        MatSelectModule,
+        MatCardModule,
+        BrowserAnimationsModule,
+      ],
     })
     .compileComponents();
   }));

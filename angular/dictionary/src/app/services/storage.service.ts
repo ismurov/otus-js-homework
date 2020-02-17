@@ -15,19 +15,29 @@ import {
 })
 export class StorageService {
   private localStorage = window.localStorage;
-  private lang: Language = Object.assign({}, defaultLanguage);
+
+  // private langKey = 'lang';
+  // private levelKey = 'level';
+
+  private lang: Language = {...defaultLanguage};
   private level: number = defaultLevel;
 
   constructor() { }
 
-  getDictFromStorage(): Array<Word> {
-    const arr = JSON.parse(this.localStorage.getItem(this.lang.value));
-    return arr instanceof Array ? arr : [];
+  getDict(): Array<Word> {
+    try {
+      const arr = JSON.parse(this.localStorage.getItem(this.lang.value));
+      return arr instanceof Array ? arr : [];
+    } catch (e) {
+      console.log(e);
+    }
+    return [];
   }
 
-  addDictItems(dictItems: Array<Word>) {
-    const dict = this.getDictFromStorage();
-    from(dictItems)
+  addToDict(items: Array<Word>) {
+    console.log('Add to dict:', items);
+    const dict = this.getDict();
+    from(items)
       .pipe(
         filter(item => !dict.find(({word}) => word === item.word)),
         map(item => dict.unshift(item))
@@ -38,24 +48,33 @@ export class StorageService {
     });
   }
 
-  clearDictStorage() {
+  clearDict() {
     this.localStorage.removeItem(this.lang.value);
   }
 
   setLang(lang: Language) {
-    console.log(lang)
-    this.lang = lang;
+    console.log('Set Language:', lang);
+    this.lang = {...lang};
   }
 
   getLang() {
-    return this.lang;
+    return {...this.lang};
+  }
+
+  resetLang() {
+    this.lang = {...defaultLanguage};
   }
 
   setLevel(level: number) {
+    console.log('Set Level:', level);
     this.level = level
   }
 
   getLevel() {
     return this.level
+  }
+
+  resetLevel() {
+    this.level = defaultLevel;
   }
 }
