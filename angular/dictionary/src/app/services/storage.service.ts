@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { from, Observable, of } from 'rxjs';
-import { filter, map, reduce } from 'rxjs/operators';
+import { from } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { Word, Language } from "../app.interfaces";
 
 import {
@@ -16,17 +16,18 @@ import {
 export class StorageService {
   private localStorage = window.localStorage;
 
-  // private langKey = 'lang';
-  // private levelKey = 'level';
+  private langKey = 'lang';
+  private levelKey = 'level';
 
-  private lang: Language = {...defaultLanguage};
-  private level: number = defaultLevel;
+  private lang: Language = null;
+  private level: number = null;
 
   constructor() { }
 
-  getDict(): Array<Word> {
+  getDict(): Word[] {
+    const lang = this.getLang();
     try {
-      const arr = JSON.parse(this.localStorage.getItem(this.lang.value));
+      const arr = JSON.parse(this.localStorage.getItem(lang.value));
       return arr instanceof Array ? arr : [];
     } catch (e) {
       console.log(e);
@@ -34,8 +35,7 @@ export class StorageService {
     return [];
   }
 
-  addToDict(items: Array<Word>) {
-    console.log('Add to dict:', items);
+  addToDict(items: Word[]) {
     const dict = this.getDict();
     from(items)
       .pipe(
@@ -52,29 +52,42 @@ export class StorageService {
     this.localStorage.removeItem(this.lang.value);
   }
 
-  setLang(lang: Language) {
-    console.log('Set Language:', lang);
-    this.lang = {...lang};
-  }
-
   getLang() {
+    if (this.lang) {
+      return {...this.lang};
+    }
+    const savedLangValue = this.localStorage.getItem(this.langKey);
+    const savedLang = languages.find(el => el.value && el.value === savedLangValue);
+    this.lang = savedLang ? {...savedLang} : {...defaultLanguage};
     return {...this.lang};
   }
 
-  resetLang() {
-    this.lang = {...defaultLanguage};
+  setLang(lang: Language) {
+    this.lang = {...lang};
+    this.localStorage.setItem(this.langKey, lang.value);
   }
 
-  setLevel(level: number) {
-    console.log('Set Level:', level);
-    this.level = level
+  resetLang() {
+    this.lang = null;
+    this.localStorage.removeItem(this.langKey);
   }
 
   getLevel() {
-    return this.level
+    if (this.level) {
+      return this.level;
+    }
+    const savedLevel = +this.localStorage.getItem(this.levelKey);
+    this.level = levels.includes(savedLevel) ? savedLevel : defaultLevel;
+    return this.level;
+  }
+
+  setLevel(level: number) {
+    this.level = level;
+    this.localStorage.setItem(this.levelKey, level.toString());
   }
 
   resetLevel() {
-    this.level = defaultLevel;
+    this.level = null;
+    this.localStorage.removeItem(this.levelKey);
   }
 }

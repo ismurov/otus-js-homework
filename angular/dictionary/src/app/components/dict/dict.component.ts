@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Word } from "../../app.interfaces";
+import { StorageService } from "../../services/storage.service";
+import { TranslateService } from "../../services/translate.service";
 
 @Component({
   selector: 'app-dict',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DictComponent implements OnInit {
 
-  constructor() { }
+  dict: Word[];
+
+  constructor(
+    private storageService: StorageService,
+    private translateService: TranslateService,
+  ) { }
 
   ngOnInit() {
+    this.dict = this.storageService.getDict();
   }
 
 }

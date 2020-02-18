@@ -1,47 +1,65 @@
 <div class="settings">
-  <h2>Settings</h2>
+  <mat-card-title>Settings</mat-card-title>
+
+  <br>
+  <br>
 
   <mat-card-content>
-    <mat-form-field>
-      <mat-label>Language</mat-label>
-      <mat-select
-        [(value)]="selectedLanguage.value"
-        (valueChange)="onChangeLangSelect($event)"
-      >
-        <mat-option
-          *ngFor="let lang of languages"
-          [value]="lang.value"
-        >
-          {{lang.display}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Number of Words</mat-label>
-      <mat-select [(value)]="selectedLevel">
-        <mat-option
-          *ngFor="let num of levels"
-          [value]="num"
-        >
-          {{num}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <p>Language: {{currentLanguage.display}}</p>
+    <p>Level: {{currentLevel}}</p>
   </mat-card-content>
 
-  <mat-card-actions>
-    <button mat-raised-button
-            (click)="onResetClick()">
-      Сбросить
-    </button>
-    <button mat-raised-button color="primary"
-            (click)="onAgreeClick()">
-      Принять
-    </button>
-    <button class="clear-button" mat-raised-button color="warn"
-            (click)="onClearClick()">
-      Очистить словарь
-    </button>
-  </mat-card-actions>
+  <div *ngIf="!editMode; then thenBlock; else elseBlock"></div>
+  <ng-template #thenBlock>
+    <mat-card-actions>    
+      <button mat-raised-button
+            (click)="onEditClick()">
+        Edit
+      </button>
+    </mat-card-actions>
+  </ng-template>
+
+  <ng-template #elseBlock>
+    <br>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Language</mat-label>
+        <mat-select
+          [(value)]="selectedLanguage.value"
+          (valueChange)="onChangeLangSelect($event)">
+          <mat-option
+            *ngFor="let lang of languages"
+            [value]="lang.value">
+            {{lang.display}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Number of Words</mat-label>
+        <mat-select [(value)]="selectedLevel">
+          <mat-option
+            *ngFor="let num of levels"
+            [value]="num">
+            {{num}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-actions>    
+      <button mat-raised-button
+              (click)="onResetClick()">
+        Reset
+      </button>
+      <button mat-raised-button color="primary"
+              (click)="onApplyClick()">
+        Apply
+      </button>
+      <button class="clear-button" mat-raised-button color="warn"
+              (click)="onClearClick()">
+        Clear Dictionary
+      </button>
+    </mat-card-actions>
+  </ng-template>
 </div>
