@@ -49,7 +49,7 @@ export class LearnComponent implements OnInit {
 
     this.userInput = '';
     this.currentWord = this.wordsService.getRandom();
-    this.message = this.currentWord.word;
+    this.message = this.currentWord ? this.currentWord.word : '';
   }
 
   newGame() {
@@ -58,7 +58,7 @@ export class LearnComponent implements OnInit {
     this.placeholder = 'Your translation';
     this.level = this.storage.getLevel();
     this.currentWord = this.wordsService.getRandom();;
-    this.message = this.currentWord.word;
+    this.message = this.currentWord ? this.currentWord.word : '';
     this.disableInput = false;
   }
 
