@@ -6,6 +6,8 @@ import {
   MatExpansionModule,
   MatInputModule,
 } from '@angular/material';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DictComponent } from './dict.component';
@@ -24,6 +26,8 @@ describe('DictComponent', () => {
         MatExpansionModule,
         MatInputModule,
         BrowserAnimationsModule,
+        FormsModule,
+        HttpClientModule,
       ],
     })
     .compileComponents();

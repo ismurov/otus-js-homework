@@ -2,14 +2,11 @@ import { Language } from "./app.interfaces";
 
 
 export const languages: Language[] = [
-    { value: 'ru-en', display: 'English'},
-    { value: 'en-ru', display: 'Russian'},
+    { value: 'en-ru', display: 'English / Russian'},
+    { value: 'ru-en', display: 'Russian / English'},
 
-    {display: 'Английский', value: 'ru-en'},
-    {display: 'Немецкий', value: 'ru-de'},
-    {display: 'Французкий', value: 'ru-fr'},
-    {display: 'Итальянский', value: 'ru-it'},
-    {display: 'Испанский', value: 'ru-es'},
+    { value: 'ru-it', display: 'Russian / Italian'},
+    { value: 'it-ru', display: 'Italian / Russian '},
 ];
 
 export const levels: number[] = [

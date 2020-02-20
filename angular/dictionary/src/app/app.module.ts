@@ -11,7 +11,9 @@ import {
   MatInputModule,
   MatSelectModule
 } from '@angular/material';
+import { FormsModule } from '@angular/forms';
 import { MatSliderModule } from '@angular/material/slider';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -35,13 +37,15 @@ import { SettingsComponent } from './components/settings/settings.component';
     MatSelectModule,
     MatSliderModule,
 
-  MatButtonModule,
-  MatCheckboxModule,
-  MatCardModule,
-  MatListModule,
-  MatExpansionModule,
-  MatInputModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatCardModule,
+    MatListModule,
+    MatExpansionModule,
+    MatInputModule,
 
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

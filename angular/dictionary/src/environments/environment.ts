@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiKey: 'trnsl.1.1.20200217T184949Z.b6a827b624dbd83f.b735e68b1fda1740cbeba30a26a0252f5418a073',
 };
 
 /*

@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
 import { StorageService } from "../../services/storage.service";
 import { Language } from "../../app.interfaces";
 import {
   languages,
   levels,
-  defaultLanguage,
-  defaultLevel
 } from "../../config";
 
 
@@ -17,14 +14,18 @@ import {
 })
 export class SettingsComponent implements OnInit {
 
-  languages: Language[] = [...languages];
-  levels: number[] = [...levels];
+  editMode: boolean = false;
+
+  currentLanguage: Language;
+  currentLevel: number;
 
   selectedLanguage: Language;
   selectedLevel: number;
 
+  languages: Language[] = [...languages];
+  levels: number[] = [...levels];
+
   constructor(
-    private router: Router,
     private storage: StorageService,
   ) {}
 
@@ -33,27 +34,37 @@ export class SettingsComponent implements OnInit {
   }
 
   setInitialState() {
+    this.getCurrentSettings();
     this.selectedLanguage = this.storage.getLang();
     this.selectedLevel = this.storage.getLevel();
   }
 
-  onChangeLangSelect(eventValue: string) {
-    console.log(this.languages.find((el, i, arr) => {console.log(el, eventValue, i, arr);return false}));
-    this.selectedLanguage = this.languages.find(({value}) => value === eventValue)
+  getCurrentSettings() {
+    this.currentLanguage = this.storage.getLang();
+    this.currentLevel = this.storage.getLevel();
   }
 
-  onAgreeClick() {
+  onChangeLangSelect(eventValue: string) {
+    this.selectedLanguage = this.languages.find(({value}) => value === eventValue);
+  }
+
+  onEditClick() {
+    this.editMode = true;
+  }
+
+  onApplyClick() {
     this.storage.setLang(this.selectedLanguage);
     this.storage.setLevel(this.selectedLevel);
+    this.getCurrentSettings();
   }
 
   onResetClick() {
-    this.storage.setLang(Object.assign({}, defaultLanguage));
-    this.storage.setLevel(defaultLevel);
+    this.storage.resetLang();
+    this.storage.resetLevel();
     this.setInitialState();
   }
 
   onClearClick() {
-    this.storage.clearDictStorage();
+    this.storage.clearDict();
   }
 }
