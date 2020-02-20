@@ -10,18 +10,18 @@ import { cityAdd, cityDelete, citySetFilter } from 'store/city/cityActions';
 import SplitScreen from 'components/SplitScreen';
 import CityList from 'components/CityList';
 
-export interface CityDisplayProps {
+export interface FavoritesDisplayProps {
   cities: ICity[],
   onAddCity: (arg0: string) => void,
   onSetCityFilter: (arg0: string) => void,
   onRemoveCity: (arg0: number) => void,
 };
 
-class CityDisplay extends React.Component<CityDisplayProps> {
+class FavoritesDisplay extends React.Component<FavoritesDisplayProps> {
   private addCityInput: HTMLInputElement | null;
   private filterInput: HTMLInputElement | null;
 
-  constructor(props: Readonly<CityDisplayProps>) {
+  constructor(props: Readonly<FavoritesDisplayProps>) {
     super(props);
 
     this.addCityInput = null;
@@ -95,6 +95,6 @@ const mapDispatchToProps = (dispatch: Dispatch<RootActionTypes>) => {
   };
 }
 
-const CityDisplayContainer = connect(mapStateToProps, mapDispatchToProps)(CityDisplay);
+const FavoritesDisplayContainer = connect(mapStateToProps, mapDispatchToProps)(FavoritesDisplay);
 
-export default CityDisplayContainer;
+export default FavoritesDisplayContainer;
