@@ -8,18 +8,20 @@ import { WordsService } from "../../services/words.service";
   styleUrls: ["./dict.component.styl"]
 })
 export class DictComponent implements OnInit {
+
   words: Word[];
   newWords: Word[] = [];
 
-  isAdd = false;
+  addMode = false;
   canSave: boolean;
   userInput = "";
 
-  constructor(private wordsService: WordsService) {}
+  constructor(
+    private wordsService: WordsService,
+  ) {}
 
   ngOnInit() {
     this.words = this.wordsService.getAll();
-    console.log(this.words);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -37,9 +39,13 @@ export class DictComponent implements OnInit {
 
   onSave(): void {
     this.wordsService.save(this.newWords);
-    this.newWords = [];
-    this.userInput = "";
-    this.isAdd = false;
     this.words = this.wordsService.getAll();
+    this.onCancel();
+  }
+
+  onCancel() {
+    this.addMode = false;
+    this.newWords = [];
+    this.userInput = '';
   }
 }

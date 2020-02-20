@@ -1,79 +1,63 @@
-<mat-accordion>
-  <mat-expansion-panel *ngFor="let wordsList of [22,33,44]">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        {{wordsList}}
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-    <mat-list>
-      <mat-list-item *ngFor="let word of ['one', 'two', 'three']"> {{word}} </mat-list-item>
-    </mat-list>
-  </mat-expansion-panel>
-</mat-accordion>
-<mat-card-actions>
-  <button mat-raised-button>
-    Добавить
-  </button>
-</mat-card-actions>
-<mat-card-footer *ngIf="true">
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Новое слово - перевод">
-  </mat-form-field>
-</mat-card-footer>
-
-<mat-card>
+<div class="dict">
   <mat-card-content>
-    <mat-accordion>
-        <mat-list dense>
-          <mat-list-item *ngFor="let word of words">
-            • {{ word.word }}: {{ word.translate }}
-          </mat-list-item>
-        </mat-list>
-    </mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Saved Words
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-list>
+        <p *ngFor="let word of words">{{ word.word }} – {{ word.translate }}</p>
+      </mat-list>
+    </mat-expansion-panel>
   </mat-card-content>
-  <mat-card-content *ngIf="isAdd">
 
-
-    <!-- <mat-grid-list cols="4" rowHeight="64px"> -->
-      <!-- <mat-grid-tile colspan="3"> -->
-
-        <mat-form-field>
-          <input matInput placeholder="Новые слова или фразы (через точку)"
-                 [(ngModel)]="userInput">
-        </mat-form-field>
-
-      <!-- </mat-grid-tile> -->
-      <!-- <mat-grid-tile colspan="1"> -->
-        <button mat-button
-                [disabled]="!userInput"
-                (click)="onTranslate()">
-          Перевести
-        </button>
-      <!-- </mat-grid-tile> -->
-    <!-- </mat-grid-list> -->
-
-    <mat-list *ngIf="newWords">
-      <mat-list-item *ngFor="let word of newWords">
-        • {{ word.word }}: {{ word.translate }}
-      </mat-list-item>
-    </mat-list>
-
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button
-            color="primary"
-            *ngIf="!isAdd; else elseBlock"
-            (click)="isAdd = !isAdd">
-      {{ 'Добавить' }}
+  <mat-card-content *ngIf="!addMode; else elseBlock">
+    <button mat-raised-button (click)="addMode = !addMode">
+      Add
     </button>
-    <ng-template #elseBlock>
-      <button mat-raised-button
-              color="primary"
-              [disabled]="!canSave"
-              (click)="onSave()">
-        {{ 'Сохранить' }}
-      </button>
-    </ng-template>
-  </mat-card-actions>
-</mat-card>
+  </mat-card-content>
 
+  <ng-template #elseBlock>
+    <mat-card-content>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Enter words to add (use “.” or “,” as a delimiter)"
+          [(ngModel)]="userInput"
+        />
+      </mat-form-field>
+      <button
+        mat-button
+        class="translate-btn"
+        [disabled]="!userInput"
+        (click)="onTranslate()"
+      >
+        Translate
+      </button>
+    </mat-card-content>
+
+    <mat-card-content *ngIf="newWords.length">
+      <p>New words for save:</p>
+      <ul>
+        <li *ngFor="let word of newWords">
+          {{ word.word }} – {{ word.translate }}
+        </li>
+      </ul>
+    </mat-card-content>
+
+    <mat-card-content>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="!canSave"
+        (click)="onSave()"
+      >
+        Save
+      </button>
+      <button mat-raised-button color="warn" (click)="onCancel()">
+        Cancel
+      </button>
+    </mat-card-content>
+  </ng-template>
+</div>

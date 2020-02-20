@@ -1,36 +1,26 @@
 <div class="settings">
-  <mat-card-title>Settings</mat-card-title>
-
-  <br>
-  <br>
-
   <mat-card-content>
-    <p>Language: {{currentLanguage.display}}</p>
-    <p>Level: {{currentLevel}}</p>
+    <p>Language: {{ currentLanguage.display }}</p>
+    <p>Level: {{ currentLevel }}</p>
   </mat-card-content>
 
-  <div *ngIf="!editMode; then thenBlock; else elseBlock"></div>
-  <ng-template #thenBlock>
-    <mat-card-actions>    
-      <button mat-raised-button
-            (click)="onEditClick()">
-        Edit
-      </button>
-    </mat-card-actions>
-  </ng-template>
+  <mat-card-actions *ngIf="!editMode; else elseBlock">
+    <button mat-raised-button (click)="onEditClick()">
+      Edit
+    </button>
+  </mat-card-actions>
 
   <ng-template #elseBlock>
-    <br>
+    <br />
     <mat-card-content>
       <mat-form-field>
         <mat-label>Language</mat-label>
         <mat-select
           [(value)]="selectedLanguage.value"
-          (valueChange)="onChangeLangSelect($event)">
-          <mat-option
-            *ngFor="let lang of languages"
-            [value]="lang.value">
-            {{lang.display}}
+          (valueChange)="onChangeLangSelect($event)"
+        >
+          <mat-option *ngFor="let lang of languages" [value]="lang.value">
+            {{ lang.display }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -38,26 +28,26 @@
       <mat-form-field>
         <mat-label>Number of Words</mat-label>
         <mat-select [(value)]="selectedLevel">
-          <mat-option
-            *ngFor="let num of levels"
-            [value]="num">
-            {{num}}
+          <mat-option *ngFor="let num of levels" [value]="num">
+            {{ num }}
           </mat-option>
         </mat-select>
       </mat-form-field>
     </mat-card-content>
 
-    <mat-card-actions>    
-      <button mat-raised-button
-              (click)="onResetClick()">
+    <mat-card-actions>
+      <button mat-raised-button (click)="onResetClick()">
         Reset
       </button>
-      <button mat-raised-button color="primary"
-              (click)="onApplyClick()">
+      <button mat-raised-button color="primary" (click)="onApplyClick()">
         Apply
       </button>
-      <button class="clear-button" mat-raised-button color="warn"
-              (click)="onClearClick()">
+      <button
+        class="clear-button"
+        mat-raised-button
+        color="warn"
+        (click)="onClearClick()"
+      >
         Clear Dictionary
       </button>
     </mat-card-actions>
