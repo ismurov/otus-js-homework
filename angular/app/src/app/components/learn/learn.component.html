@@ -1,0 +1,35 @@
+<div class="game">
+  <mat-card-title>
+    {{ message }}
+  </mat-card-title>
+
+  <br />
+  <br />
+
+  <mat-card-content *ngIf="!disableInput">
+    <mat-form-field class="example-full-width">
+      <input
+        matInput
+        [placeholder]="placeholder"
+        [(ngModel)]="userInput"
+        [disabled]="disableInput"
+        autocomplete="off"
+      />
+    </mat-form-field>
+  </mat-card-content>
+
+  <br />
+  <br />
+
+  <mat-card-actions>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="onNext()"
+      [disabled]="!userInput && !disableInput"
+    >
+      <span *ngIf="turn < level"> {{ turn + 1 }}/{{ level }} • </span>
+      Next
+    </button>
+  </mat-card-actions>
+</div>
