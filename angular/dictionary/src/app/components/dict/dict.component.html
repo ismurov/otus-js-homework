@@ -1,0 +1,63 @@
+<div class="dict">
+  <mat-card-content>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Saved Words
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-list>
+        <p *ngFor="let word of words">{{ word.word }} – {{ word.translate }}</p>
+      </mat-list>
+    </mat-expansion-panel>
+  </mat-card-content>
+
+  <mat-card-content *ngIf="!addMode; else elseBlock">
+    <button mat-raised-button (click)="addMode = !addMode">
+      Add
+    </button>
+  </mat-card-content>
+
+  <ng-template #elseBlock>
+    <mat-card-content>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Enter words to add (use “.” or “,” as a delimiter)"
+          [(ngModel)]="userInput"
+        />
+      </mat-form-field>
+      <button
+        mat-button
+        class="translate-btn"
+        [disabled]="!userInput"
+        (click)="onTranslate()"
+      >
+        Translate
+      </button>
+    </mat-card-content>
+
+    <mat-card-content *ngIf="newWords.length">
+      <p>New words for save:</p>
+      <ul>
+        <li *ngFor="let word of newWords">
+          {{ word.word }} – {{ word.translate }}
+        </li>
+      </ul>
+    </mat-card-content>
+
+    <mat-card-content>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="!canSave"
+        (click)="onSave()"
+      >
+        Save
+      </button>
+      <button mat-raised-button color="warn" (click)="onCancel()">
+        Cancel
+      </button>
+    </mat-card-content>
+  </ng-template>
+</div>
