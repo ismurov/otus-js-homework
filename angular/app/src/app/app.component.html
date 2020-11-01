@@ -2,7 +2,10 @@
   <!--NavBar-->
   <nav mat-tab-nav-bar class="navbar">
     <a mat-tab-link
-      *ngFor="let link of navLinks">
+      *ngFor="let link of navLinks"
+      [routerLink]="link.path"
+      routerLinkActive #rla="routerLinkActive"
+      [active]="rla.isActive">
       {{link.label}}
     </a>
   </nav>
@@ -10,6 +13,6 @@
   <!--Content-->
   <main class="content">
     <!--Router-->
-    hello world
+    <router-outlet></router-outlet>
   </main>
 </div>
